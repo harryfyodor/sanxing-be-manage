@@ -16,6 +16,9 @@ const routes = [
   },
   { path: '/tags',
     main: Tags
+  },
+  { path: '/articles',
+    main: Broadcast
   }
 ]
 

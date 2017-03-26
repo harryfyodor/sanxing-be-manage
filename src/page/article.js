@@ -20,11 +20,17 @@ const columnsBefore = [{
       return <Tag key={tag + index} color="blue">{tag}</Tag>
     })
   }
+},{
+  title: '图片',
+  dataIndex: 'pics',
+  key: 'pics',
 }, {
   title: '操作',
   key: 'action',
   render: (text, record) => (
     <span>
+      <a href="#">修改</a>
+      <span className="ant-divider" />
       <a href="#">删除</a>
     </span>
   ),
@@ -120,8 +126,8 @@ class Broadcast extends Component {
   render() {
     return <div>
         <div className="title">
-          <h2>文章推荐</h2>
-          <Button style={{marginBottom: '10px'}} onClick={this.showModal}>添加推荐文章</Button>
+          <h2>广播问题</h2>
+          <Button style={{marginBottom: '10px'}} onClick={this.showModal}>添加广播问题</Button>
         </div>
         <Tabs defaultActiveKey="1" onChange={this.callback}>
           <TabPane tab="已经发布" key="1">
@@ -129,6 +135,7 @@ class Broadcast extends Component {
               columns={columnsAfter} 
               dataSource={data} 
               bordered
+              title={() => '广播问题／已经发布'}
             />
           </TabPane>
           <TabPane tab="还未发布" key="2">
@@ -136,6 +143,7 @@ class Broadcast extends Component {
               columns={columnsBefore} 
               dataSource={data} 
               bordered
+              title={() => '广播问题／还未发布'}
             />
           </TabPane>
         </Tabs>

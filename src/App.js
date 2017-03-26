@@ -9,6 +9,7 @@ import {
   Link
 } from 'react-router-dom'
 import routes from './router';
+import ModalLogin from './components/login';
 
 class App extends Component {
   state = {
@@ -71,11 +72,14 @@ class App extends Component {
                   defaultOpenKeys={['sub1']}
                   style={{ height: '100%' }}
                 >
-                  <SubMenu key="sub1" title={<span style={{ 'fontSize': '14px' }}><Icon type="user" />问题管理</span>}>
+                  <SubMenu key="sub1" title={<span style={{ 'fontSize': '14px' }}><Icon type="question-circle" />问题管理</span>}>
                     <Menu.Item key="1" style={{ 'fontSize': '14px' }}><Link to="/daily">每日问题</Link></Menu.Item>
                     <Menu.Item key="2" style={{ 'fontSize': '14px' }}><Link to="/broadcast">广播问题</Link></Menu.Item>
                   </SubMenu>
-                  <SubMenu key="sub2" title={<span style={{ 'fontSize': '14px' }}><Icon type="laptop" />标签管理</span>}>
+                  <SubMenu key="sub2" title={<span style={{ 'fontSize': '14px' }}><Icon type="book" />文章推荐</span>}>
+                    <Menu.Item key="3" style={{ 'fontSize': '14px' }}><Link to="/articles">文章推荐</Link></Menu.Item>
+                  </SubMenu>
+                  <SubMenu key="sub3" title={<span style={{ 'fontSize': '14px' }}><Icon type="laptop" />标签管理</span>}>
                     <Menu.Item key="5" style={{ 'fontSize': '14px' }}><Link to="/tags">标签管理</Link></Menu.Item>
                   </SubMenu>
                 </Menu>
@@ -95,14 +99,12 @@ class App extends Component {
           <Footer style={{ textAlign: 'center' }}>
             Ant Design ©2016 Created by Ant UED
           </Footer>
-          <Modal title="Title of the modal dialog"
+          <ModalLogin 
             visible={this.state.visible}
             onOk={this.handleOk}
             confirmLoading={this.state.confirmLoading}
             onCancel={this.handleCancel}
-          >
-            <p>{this.state.ModalText}</p>
-          </Modal>
+          />
         </Layout>
       </Router>
     );

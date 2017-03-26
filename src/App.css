@@ -28,3 +28,9 @@
 h2 {
   margin-bottom: 7px;
 }
+
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
