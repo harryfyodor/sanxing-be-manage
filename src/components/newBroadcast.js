@@ -40,21 +40,21 @@ class NewBroadcastForm extends React.Component {
       >
         <Form onSubmit={this.handleSubmit} className="login-form">
           <FormItem>
-            {getFieldDecorator('userName', {
-              rules: [{ required: true, message: '请输入用户名' }],
+            {getFieldDecorator('qs', {
+              rules: [{ required: true, message: '请输入问题内容' }],
             })(
-              <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="Username" />
+              <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="问题内容" />
             )}
           </FormItem>
           <FormItem>
-            {getFieldDecorator('password', {
-              rules: [{ required: true, message: '请输入密码' }],
+            {getFieldDecorator('pics', {
+              rules: [{ required: true, message: '请输入图片URL' }],
             })(
-              <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="Password" />
+              <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} placeholder="图片URL" />
             )}
           </FormItem>
           <div>
-            <strong>Hots: </strong>
+            <strong>标签: </strong>
             {tagsFromServer.map(tag => (
             <CheckableTag
                 key={tag}

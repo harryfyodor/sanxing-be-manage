@@ -27,7 +27,7 @@ class NewDaily extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <Modal title="管理员登录"
+      <Modal title="每日问题添加"
         visible={this.props.visible}
         onOk={this.props.onOk}
         confirmLoading={this.props.confirmLoading}
@@ -40,22 +40,15 @@ class NewDaily extends React.Component {
       >
         <Form onSubmit={this.handleSubmit} className="login-form">
           <FormItem>
-            {getFieldDecorator('userName', {
+            {getFieldDecorator('qs', {
               initialValue: "初始值",
-              rules: [{ required: true, message: '请输入用户名' }],
+              rules: [{ required: true, message: '请输入问题内容' }],
             })(
-              <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="Username" />
-            )}
-          </FormItem>
-          <FormItem>
-            {getFieldDecorator('password', {
-              rules: [{ required: true, message: '请输入密码' }],
-            })(
-              <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="Password" />
+              <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="问题内容" />
             )}
           </FormItem>
           <div>
-            <strong>Hots: </strong>
+            <strong>标签: </strong>
             {tagsFromServer.map(tag => (
             <CheckableTag
                 key={tag}

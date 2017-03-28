@@ -76,8 +76,8 @@ class App extends Component {
                     <Menu.Item key="1" style={{ 'fontSize': '14px' }}><Link to="/daily">每日问题</Link></Menu.Item>
                     <Menu.Item key="2" style={{ 'fontSize': '14px' }}><Link to="/broadcast">广播问题</Link></Menu.Item>
                   </SubMenu>
-                  <SubMenu key="sub2" title={<span style={{ 'fontSize': '14px' }}><Icon type="book" />文章推荐</span>}>
-                    <Menu.Item key="3" style={{ 'fontSize': '14px' }}><Link to="/articles">文章推荐</Link></Menu.Item>
+                  <SubMenu key="sub2" title={<span style={{ 'fontSize': '14px' }}><Icon type="book" />文章管理</span>}>
+                    <Menu.Item key="3" style={{ 'fontSize': '14px' }}><Link to="/articles">文章管理</Link></Menu.Item>
                   </SubMenu>
                   <SubMenu key="sub3" title={<span style={{ 'fontSize': '14px' }}><Icon type="laptop" />标签管理</span>}>
                     <Menu.Item key="5" style={{ 'fontSize': '14px' }}><Link to="/tags">标签管理</Link></Menu.Item>

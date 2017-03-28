@@ -2,6 +2,7 @@ import Daily from './page/daily';
 import Broadcast from './page/broadcast';
 import Tags from './page/tags';
 import About from './page/about';
+import Article from './page/article';
 
 const routes = [
   { path: '/',
@@ -18,7 +19,7 @@ const routes = [
     main: Tags
   },
   { path: '/articles',
-    main: Broadcast
+    main: Article
   }
 ]
 
