@@ -4,7 +4,7 @@ const FormItem = Form.Item;
 const CheckableTag = Tag.CheckableTag;
 const tagsFromServer = ['Movie', 'Books', 'Music'];
 
-class NewDaily extends React.Component {
+class NewArticle extends React.Component {
   state = {
       selectedTags: [],
   };
@@ -27,35 +27,27 @@ class NewDaily extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <Modal title="管理员登录"
+      <Modal title="添加每日问题"
         visible={this.props.visible}
         onOk={this.props.onOk}
         confirmLoading={this.props.confirmLoading}
         onCancel={this.props.onCancel}
         footer={[
           <Button key="submit" type="primary" size="large" onClick={this.props.onOk}>
-            登录
+            确定
           </Button>,
         ]}
       >
-        <Form onSubmit={this.handleSubmit} className="login-form">
+        <Form onSubmit={this.handleSubmit}>
           <FormItem>
-            {getFieldDecorator('userName', {
-              initialValue: "初始值",
-              rules: [{ required: true, message: '请输入用户名' }],
+            {getFieldDecorator('question', {
+              rules: [{ required: true, message: '请输入题目内容' }],
             })(
-              <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="Username" />
-            )}
-          </FormItem>
-          <FormItem>
-            {getFieldDecorator('password', {
-              rules: [{ required: true, message: '请输入密码' }],
-            })(
-              <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="Password" />
+              <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="题目内容" />
             )}
           </FormItem>
           <div>
-            <strong>Hots: </strong>
+            <strong>标签: </strong>
             {tagsFromServer.map(tag => (
             <CheckableTag
                 key={tag}
@@ -65,13 +57,13 @@ class NewDaily extends React.Component {
                 {tag}
             </CheckableTag>
             ))}
-        </div>
+          </div>
         </Form>
       </Modal>
     );
   }
 }
 
-const WrappedNewDaily = Form.create()(NewDaily);
+const WrappedNewArticle = Form.create()(NewArticle);
 
-export default WrappedNewDaily;
+export default WrappedNewArticle;

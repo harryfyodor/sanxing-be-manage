@@ -126,24 +126,22 @@ class Broadcast extends Component {
   render() {
     return <div>
         <div className="title">
-          <h2>广播问题</h2>
-          <Button style={{marginBottom: '10px'}} onClick={this.showModal}>添加广播问题</Button>
+          <h2>文章管理</h2>
+          <Button style={{marginBottom: '10px'}} onClick={this.showModal}>添加文章</Button>
         </div>
         <Tabs defaultActiveKey="1" onChange={this.callback}>
-          <TabPane tab="已经发布" key="1">
+          <TabPane tab="未发文章群" key="1">
             <Table 
               columns={columnsAfter} 
               dataSource={data} 
               bordered
-              title={() => '广播问题／已经发布'}
             />
           </TabPane>
-          <TabPane tab="还未发布" key="2">
+          <TabPane tab="历史文章群" key="2">
             <Table 
               columns={columnsBefore} 
               dataSource={data} 
               bordered
-              title={() => '广播问题／还未发布'}
             />
           </TabPane>
         </Tabs>

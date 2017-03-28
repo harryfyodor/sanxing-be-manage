@@ -34,27 +34,27 @@ class NewBroadcastForm extends React.Component {
         onCancel={this.props.onCancel}
         footer={[
           <Button key="submit" type="primary" size="large" onClick={this.props.onOk}>
-            登录
+            确定
           </Button>,
         ]}
       >
-        <Form onSubmit={this.handleSubmit} className="login-form">
+        <Form onSubmit={this.handleSubmit}>
           <FormItem>
-            {getFieldDecorator('userName', {
-              rules: [{ required: true, message: '请输入用户名' }],
+            {getFieldDecorator('question', {
+              rules: [{ required: true, message: '请输入题目内容' }],
             })(
-              <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="Username" />
+              <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="题目内容" />
             )}
           </FormItem>
           <FormItem>
-            {getFieldDecorator('password', {
-              rules: [{ required: true, message: '请输入密码' }],
+            {getFieldDecorator('image', {
+              rules: [{ required: true, message: '请输入题目图片URL' }],
             })(
-              <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="Password" />
+              <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} placeholder="题目图片" />
             )}
           </FormItem>
           <div>
-            <strong>Hots: </strong>
+            <strong>标签: </strong>
             {tagsFromServer.map(tag => (
             <CheckableTag
                 key={tag}

@@ -2,36 +2,12 @@ import React, { Component } from 'react';
 import { Table, Icon, Tabs, Button, Tag } from 'antd';
 import { Link } from 'react-router';
 import NewBroadcast from '../components/newBroadcast';
-const TabPane = Tabs.TabPane;
 import reqwest from 'reqwest';
+import NewDaily from '../components/newDaily';
+const TabPane = Tabs.TabPane;
 
 // 还未发布
-const columnsBefore = [{
-  title: '题目',
-  dataIndex: 'qs',
-  key: 'qs',
-  render: text => <a href="#">{text}</a>,
-}, {
-  title: '标签',
-  dataIndex: 'tags',
-  key: 'tags',
-  render: arr => {
-    return arr.map((tag, index) => {
-      return <Tag key={tag + index} color="blue">{tag}</Tag>
-    })
-  }
-}, {
-  title: '操作',
-  key: 'action',
-  render: (text, record) => (
-    <span>
-      <a href="#">删除</a>
-    </span>
-  ),
-}];
-
-// 已经发布
-const columnsAfter = [{
+const columns = [{
   title: '题目',
   dataIndex: 'qs',
   key: 'qs',
@@ -48,32 +24,26 @@ const columnsAfter = [{
 }, {
   title: '喜欢',
   dataIndex: 'likes',
-  key: 'likes',
+  key: 'likes'
 }, {
-  title: '图片',
-  dataIndex: 'pics',
-  key: 'pics',
+  title: '回答次数',
+  dataIndex: 'times',
+  key: 'times'
 }, {
   title: '操作',
   key: 'action',
   render: (text, record) => (
     <span>
-      <a href="#">修改</a>
-      <span className="ant-divider" />
       <a href="#">删除</a>
     </span>
   ),
-}, {
-  title: '时间',
-  dataIndex: 'time',
-  key: 'time',
 }];
 
 const data = [{
   key: '1',
   qs: '你好吗？',
-  pics: 'www.baidu.com',
   likes: 20,
+  times: 20,
   time: '2016-1-1',
   tags: ['tag 1', 'tag 2', 'tag 3']
 }];
@@ -120,26 +90,15 @@ class Broadcast extends Component {
   render() {
     return <div>
         <div className="title">
-          <h2>文章推荐</h2>
-          <Button style={{marginBottom: '10px'}} onClick={this.showModal}>添加推荐文章</Button>
+          <h2>每日问题</h2>
+          <Button style={{marginBottom: '10px'}} onClick={this.showModal}>添加每日问题</Button>
         </div>
-        <Tabs defaultActiveKey="1" onChange={this.callback}>
-          <TabPane tab="已经发布" key="1">
-            <Table 
-              columns={columnsAfter} 
-              dataSource={data} 
-              bordered
-            />
-          </TabPane>
-          <TabPane tab="还未发布" key="2">
-            <Table 
-              columns={columnsBefore} 
-              dataSource={data} 
-              bordered
-            />
-          </TabPane>
-        </Tabs>
-        <NewBroadcast
+        <Table 
+          columns={columns} 
+          dataSource={data} 
+          bordered
+        />
+        <NewDaily
           visible={this.state.visible}
           onOk={this.handleOk}
           confirmLoading={this.state.confirmLoading}
