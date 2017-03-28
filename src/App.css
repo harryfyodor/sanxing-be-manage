@@ -34,3 +34,17 @@ h2 {
   flex-direction: row;
   justify-content: space-between;
 }
+
+/* 卡片 */
+.custom-image img {
+}
+.custom-card {
+  padding: 10px 16px;
+}
+.custom-card p {
+  color: #999;
+}
+
+.card {
+  margin: 10px;
+}

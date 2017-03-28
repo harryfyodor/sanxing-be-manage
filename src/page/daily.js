@@ -1,75 +1,73 @@
 import React, { Component } from 'react';
-import { Table, Icon, Tabs, Button, Tag } from 'antd';
+import { Table, Icon, Tabs, Button, Tag, Popconfirm, message } from 'antd';
 import { Link } from 'react-router';
-<<<<<<< HEAD
-import NewBroadcast from '../components/newBroadcast';
-=======
 import NewDaliy from '../components/newDaily';
 const TabPane = Tabs.TabPane;
->>>>>>> 432bdba16012aff2ae257c3f4bc421d69f6465ae
 import reqwest from 'reqwest';
 import NewDaily from '../components/newDaily';
-const TabPane = Tabs.TabPane;
 
-// 还未发布
-const columns = [{
-  title: '题目',
-  dataIndex: 'qs',
-  key: 'qs',
-  render: text => <a href="#">{text}</a>,
-}, {
-  title: '标签',
-  dataIndex: 'tags',
-  key: 'tags',
-  render: arr => {
-    return arr.map((tag, index) => {
-      return <Tag key={tag + index} color="blue">{tag}</Tag>
-    })
-  }
-}, {
-  title: '喜欢',
-  dataIndex: 'likes',
-  key: 'likes'
-}, {
-  title: '回答次数',
-  dataIndex: 'times',
-<<<<<<< HEAD
-  key: 'times'
-=======
-  key: 'times',
->>>>>>> 432bdba16012aff2ae257c3f4bc421d69f6465ae
-}, {
-  title: '操作',
-  key: 'action',
-  render: (text, record) => (
-    <span>
-      <a href="#">删除</a>
-    </span>
-  ),
-}];
+function confirm(e) {
+  console.log(e);
+  message.success('Click on Yes');
+}
+
+function cancel(e) {
+  console.log(e);
+  message.error('Click on No');
+}
 
 const data = [{
   key: '1',
-<<<<<<< HEAD
-  qs: '你好吗？',
-  likes: 20,
-  times: 20,
-  time: '2016-1-1',
-=======
   qs: 'How are you？',
   likes: 20,
   times: '20',
->>>>>>> 432bdba16012aff2ae257c3f4bc421d69f6465ae
   tags: ['tag 1', 'tag 2', 'tag 3']
 }];
 
 class Broadcast extends Component {
-  state = {
-    collapsed: false,
-    mode: 'inline',
-    ModalText: 'Content of the modal dialog',
-    visible: false,
-  };
+  constructor() {
+    super();
+    this.state = {
+      columns: [{
+        title: '题目',
+        dataIndex: 'qs',
+        key: 'qs',
+        render: text => <a href="#">{text}</a>,
+      }, {
+        title: '标签',
+        dataIndex: 'tags',
+        key: 'tags',
+        render: arr => {
+          return arr.map((tag, index) => {
+            return <Tag key={tag + index} color="blue">{tag}</Tag>
+          })
+        }
+      }, {
+        title: '喜欢',
+        dataIndex: 'likes',
+        key: 'likes'
+      }, {
+        title: '回答次数',
+        dataIndex: 'times',
+        key: 'times',
+      }, {
+        title: '操作',
+        key: 'action',
+        render: (text, record) => (
+          <span>
+            <Popconfirm title="Are you sure delete this task?" onConfirm={confirm} onCancel={cancel} okText="Yes" cancelText="No">
+              <a href="#" onClick={() => {console.log(this)}}>删除</a>
+            </Popconfirm>
+          </span>
+        ),
+      }],
+      collapsed: false,
+      mode: 'inline',
+      ModalText: 'Content of the modal dialog',
+      visible: false,
+    };
+  }
+
   callback = (key) => {
     console.log(key);
   }
@@ -109,7 +107,7 @@ class Broadcast extends Component {
           <Button style={{marginBottom: '10px'}} onClick={this.showModal}>添加每日问题</Button>
         </div>
         <Table 
-          columns={columns} 
+          columns={this.state.columns} 
           dataSource={data} 
           bordered
         />

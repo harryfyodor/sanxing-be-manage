@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
-import { Table, Icon, Tabs, Button, Tag } from 'antd';
+import { Table, Icon, Tabs, Button, Tag, Popconfirm, message } from 'antd';
 import { Link } from 'react-router';
 import NewBroadcast from '../components/newBroadcast';
 const TabPane = Tabs.TabPane;
 import reqwest from 'reqwest';
+
+function confirm(e) {
+  console.log(e);
+  message.success('Click on Yes');
+}
+
+function cancel(e) {
+  console.log(e);
+  message.error('Click on No');
+}
 
 // 还未发布
 const columnsBefore = [{
@@ -31,7 +41,9 @@ const columnsBefore = [{
     <span>
       <a href="#">修改</a>
       <span className="ant-divider" />
-      <a href="#">删除</a>
+      <Popconfirm title="确定删除此文章?" onConfirm={confirm} onCancel={cancel} okText="确定" cancelText="取消">
+        <a href="#">删除</a>
+      </Popconfirm>
     </span>
   ),
 }];
@@ -66,7 +78,9 @@ const columnsAfter = [{
     <span>
       <a href="#">修改</a>
       <span className="ant-divider" />
-      <a href="#">删除</a>
+      <Popconfirm title="确定删除此文章?" onConfirm={confirm} onCancel={cancel} okText="确定" cancelText="取消">
+        <a href="#">删除</a>
+      </Popconfirm>
     </span>
   ),
 }, {
@@ -125,32 +139,32 @@ class Broadcast extends Component {
   }
   render() {
     return <div>
-        <div className="title">
-          <h2>文章管理</h2>
-          <Button style={{marginBottom: '10px'}} onClick={this.showModal}>添加文章</Button>
-        </div>
-        <Tabs defaultActiveKey="1" onChange={this.callback}>
-          <TabPane tab="未发文章群" key="1">
-            <Table 
-              columns={columnsAfter} 
-              dataSource={data} 
-              bordered
-            />
-          </TabPane>
-          <TabPane tab="历史文章群" key="2">
-            <Table 
-              columns={columnsBefore} 
-              dataSource={data} 
-              bordered
-            />
-          </TabPane>
-        </Tabs>
-        <NewBroadcast
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          confirmLoading={this.state.confirmLoading}
-          onCancel={this.handleCancel}
-        />
+      <div className="title">
+        <h2>文章管理</h2>
+        <Button style={{marginBottom: '10px'}} onClick={this.showModal}>添加文章</Button>
+      </div>
+      <Tabs defaultActiveKey="1" onChange={this.callback}>
+        <TabPane tab="未发文章群" key="1">
+          <Table 
+            columns={columnsAfter} 
+            dataSource={data} 
+            bordered
+          />
+        </TabPane>
+        <TabPane tab="历史文章群" key="2">
+          <Table 
+            columns={columnsBefore} 
+            dataSource={data} 
+            bordered
+          />
+        </TabPane>
+      </Tabs>
+      <NewBroadcast
+        visible={this.state.visible}
+        onOk={this.handleOk}
+        confirmLoading={this.state.confirmLoading}
+        onCancel={this.handleCancel}
+      />
     </div>
   }
 }

@@ -20,12 +20,6 @@ class NormalLoginForm extends React.Component {
         visible={this.props.visible}
         onOk={this.props.onOk}
         confirmLoading={this.props.confirmLoading}
-        onCancel={this.props.onCancel}
-        footer={[
-          <Button key="submit" type="primary" size="large" onClick={this.props.onOk}>
-            登录
-          </Button>,
-        ]}
       >
         <Form onSubmit={this.handleSubmit} className="login-form">
           <FormItem>

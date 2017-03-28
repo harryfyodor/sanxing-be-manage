@@ -3,6 +3,7 @@ import Broadcast from './page/broadcast';
 import Tags from './page/tags';
 import About from './page/about';
 import Article from './page/article';
+import Pics from './page/pics';
 
 const routes = [
   { path: '/',
@@ -20,7 +21,11 @@ const routes = [
   },
   { path: '/articles',
     main: Article
+  },
+  {
+    path: '/pics',
+    main: Pics
   }
 ]
 
-export default routes;
+export default routes

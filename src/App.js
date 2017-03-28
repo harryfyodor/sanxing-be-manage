@@ -1,33 +1,31 @@
-import React, { Component } from 'react';
-import './App.css';
-import { Layout, Menu, Icon, Modal, Button } from 'antd';
-const { SubMenu } = Menu;
-const { Header, Content, Footer, Sider } = Layout;
+import React, { Component } from 'react'
+import './App.css'
+import { Layout, Menu, Icon, Modal, Button } from 'antd'
+import { observer } from 'mobx-react';
+const { SubMenu } = Menu
+const { Header, Content, Footer, Sider } = Layout
 import {
   BrowserRouter as Router,
   Route,
   Link
 } from 'react-router-dom'
-import routes from './router';
-import ModalLogin from './components/login';
+import routes from './router'
+import ModalLogin from './components/login'
 
-class App extends Component {
-  state = {
-    collapsed: false,
-    mode: 'inline',
-    ModalText: 'Content of the modal dialog',
-    visible: false,
-  };
-  onCollapse = (collapsed) => {
-    this.setState({
-      collapsed,
-      mode: collapsed ? 'vertical' : 'inline',
-    });
+const App = observer(class App extends Component {
+  constructor(props) {
+    super(props)
+    console.log(this.props)
+    this.state = {
+      collapsed: false,
+      mode: 'inline',
+      ModalText: 'Content of the modal dialog',
+      visible: false,
+      confirmLoading: false
+    }
   }
   showModal = () => {
-    this.setState({
-      visible: true,
-    });
+    this.props.userStore.logout();
   }
   handleOk = () => {
     this.setState({
@@ -35,17 +33,8 @@ class App extends Component {
       confirmLoading: true,
     });
     setTimeout(() => {
-      this.setState({
-        visible: false,
-        confirmLoading: false,
-      });
+      this.props.userStore.login();
     }, 2000);
-  }
-  handleCancel = () => {
-    console.log('Clicked cancel button');
-    this.setState({
-      visible: false,
-    });
   }
   render() {
     return (
@@ -82,6 +71,9 @@ class App extends Component {
                   <SubMenu key="sub3" title={<span style={{ 'fontSize': '14px' }}><Icon type="laptop" />标签管理</span>}>
                     <Menu.Item key="5" style={{ 'fontSize': '14px' }}><Link to="/tags">标签管理</Link></Menu.Item>
                   </SubMenu>
+                  <SubMenu key="sub4" title={<span style={{ 'fontSize': '14px' }}><Icon type="laptop" />图片管理</span>}>
+                    <Menu.Item key="6" style={{ 'fontSize': '14px' }}><Link to="/pics">图片管理</Link></Menu.Item>
+                  </SubMenu>
                 </Menu>
               </Sider>
               <Content style={{ padding: '0 24px', minHeight: 280 }}>
@@ -100,15 +92,15 @@ class App extends Component {
             Ant Design ©2016 Created by Ant UED
           </Footer>
           <ModalLogin 
-            visible={this.state.visible}
+            visible={!this.props.userStore.isLogin}
             onOk={this.handleOk}
             confirmLoading={this.state.confirmLoading}
             onCancel={this.handleCancel}
           />
         </Layout>
       </Router>
-    );
+    )
   }
-}
+})
 
 export default App;

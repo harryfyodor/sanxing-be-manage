@@ -1,79 +1,19 @@
 import React, { Component } from 'react';
-import { Table, Icon, Tabs, Button, Tag } from 'antd';
+import { Table, Icon, Tabs, Button, Tag, Popconfirm, message } from 'antd';
 import { Link } from 'react-router';
 import NewBroadcast from '../components/newBroadcast';
 const TabPane = Tabs.TabPane;
 import reqwest from 'reqwest';
 
-// 还未发布
-const columnsBefore = [{
-  title: '题目',
-  dataIndex: 'qs',
-  key: 'qs',
-  render: text => <a href="#">{text}</a>,
-}, {
-  title: '标签',
-  dataIndex: 'tags',
-  key: 'tags',
-  render: arr => {
-    return arr.map((tag, index) => {
-      return <Tag key={tag + index} color="blue">{tag}</Tag>
-    })
-  }
-},{
-  title: '图片',
-  dataIndex: 'pics',
-  key: 'pics',
-}, {
-  title: '操作',
-  key: 'action',
-  render: (text, record) => (
-    <span>
-      <a href="#">修改</a>
-      <span className="ant-divider" />
-      <a href="#">删除</a>
-    </span>
-  ),
-}];
+function confirm(e) {
+  console.log(e);
+  message.success('Click on Yes');
+}
 
-// 已经发布
-const columnsAfter = [{
-  title: '题目',
-  dataIndex: 'qs',
-  key: 'qs',
-  render: text => <a href="#">{text}</a>,
-}, {
-  title: '标签',
-  dataIndex: 'tags',
-  key: 'tags',
-  render: arr => {
-    return arr.map((tag, index) => {
-      return <Tag key={tag + index} color="blue">{tag}</Tag>
-    })
-  }
-}, {
-  title: '喜欢',
-  dataIndex: 'likes',
-  key: 'likes',
-}, {
-  title: '图片',
-  dataIndex: 'pics',
-  key: 'pics',
-}, {
-  title: '操作',
-  key: 'action',
-  render: (text, record) => (
-    <span>
-      <a href="#">修改</a>
-      <span className="ant-divider" />
-      <a href="#">删除</a>
-    </span>
-  ),
-}, {
-  title: '时间',
-  dataIndex: 'time',
-  key: 'time',
-}];
+function cancel(e) {
+  console.log(e);
+  message.error('Click on No');
+}
 
 const data = [{
   key: '1',
@@ -85,12 +25,88 @@ const data = [{
 }];
 
 class Broadcast extends Component {
-  state = {
-    collapsed: false,
-    mode: 'inline',
-    ModalText: 'Content of the modal dialog',
-    visible: false,
-  };
+  constructor() {
+    super();
+    this.state = {
+      // 还未发布
+      columnsBefore: [{
+        title: '题目',
+        dataIndex: 'qs',
+        key: 'qs',
+        render: text => <a href="#">{text}</a>,
+      }, {
+        title: '标签',
+        dataIndex: 'tags',
+        key: 'tags',
+        render: arr => {
+          return arr.map((tag, index) => {
+            return <Tag key={tag + index} color="blue">{tag}</Tag>
+          })
+        }
+      },{
+        title: '图片',
+        dataIndex: 'pics',
+        key: 'pics',
+      }, {
+        title: '操作',
+        key: 'action',
+        render: (text, record) => (
+          <span>
+            <a href="#" onClick={() => { this.setState({visible: true}) }}>修改</a>
+            <span className="ant-divider" />
+            <Popconfirm title="Are you sure delete this task?" onConfirm={confirm} onCancel={cancel} okText="Yes" cancelText="No">
+              <a href="#">删除</a>
+            </Popconfirm>
+          </span>
+        ),
+      }],
+      // 已经发布
+      columnsAfter: [{
+        title: '题目',
+        dataIndex: 'qs',
+        key: 'qs',
+        render: text => <a href="#">{text}</a>,
+      }, {
+        title: '标签',
+        dataIndex: 'tags',
+        key: 'tags',
+        render: arr => {
+          return arr.map((tag, index) => {
+            return <Tag key={tag + index} color="blue">{tag}</Tag>
+          })
+        }
+      }, {
+        title: '喜欢',
+        dataIndex: 'likes',
+        key: 'likes',
+      }, {
+        title: '图片',
+        dataIndex: 'pics',
+        key: 'pics',
+      }, {
+        title: '操作',
+        key: 'action',
+        render: (text, record) => (
+          <span>
+            <a href="#" onClick={() => { this.setState({visible: true}) }}>修改</a>
+            <span className="ant-divider" />
+            <Popconfirm title="Are you sure delete this task?" onConfirm={confirm} onCancel={cancel} okText="Yes" cancelText="No">
+              <a href="#">删除</a>
+            </Popconfirm>
+          </span>
+        ),
+      }, {
+        title: '时间',
+        dataIndex: 'time',
+        key: 'time',
+      }],
+      collapsed: false,
+      mode: 'inline',
+      ModalText: 'Content of the modal dialog',
+      visible: false
+    }
+  }
+
   callback = (key) => {
     console.log(key);
   }
@@ -132,14 +148,14 @@ class Broadcast extends Component {
         <Tabs defaultActiveKey="1" onChange={this.callback}>
           <TabPane tab="已经发布" key="1">
             <Table 
-              columns={columnsAfter} 
+              columns={this.state.columnsAfter} 
               dataSource={data} 
               bordered
             />
           </TabPane>
           <TabPane tab="还未发布" key="2">
             <Table 
-              columns={columnsBefore} 
+              columns={this.state.columnsBefore} 
               dataSource={data} 
               bordered
             />
