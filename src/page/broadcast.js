@@ -135,7 +135,6 @@ class Broadcast extends Component {
               columns={columnsAfter} 
               dataSource={data} 
               bordered
-              title={() => '广播问题／已经发布'}
             />
           </TabPane>
           <TabPane tab="还未发布" key="2">
@@ -143,7 +142,6 @@ class Broadcast extends Component {
               columns={columnsBefore} 
               dataSource={data} 
               bordered
-              title={() => '广播问题／还未发布'}
             />
           </TabPane>
         </Tabs>

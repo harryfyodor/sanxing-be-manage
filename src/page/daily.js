@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { Table, Icon, Tabs, Button, Tag } from 'antd';
 import { Link } from 'react-router';
+<<<<<<< HEAD
 import NewBroadcast from '../components/newBroadcast';
+=======
+import NewDaliy from '../components/newDaily';
+const TabPane = Tabs.TabPane;
+>>>>>>> 432bdba16012aff2ae257c3f4bc421d69f6465ae
 import reqwest from 'reqwest';
 import NewDaily from '../components/newDaily';
 const TabPane = Tabs.TabPane;
@@ -28,7 +33,11 @@ const columns = [{
 }, {
   title: '回答次数',
   dataIndex: 'times',
+<<<<<<< HEAD
   key: 'times'
+=======
+  key: 'times',
+>>>>>>> 432bdba16012aff2ae257c3f4bc421d69f6465ae
 }, {
   title: '操作',
   key: 'action',
@@ -41,10 +50,16 @@ const columns = [{
 
 const data = [{
   key: '1',
+<<<<<<< HEAD
   qs: '你好吗？',
   likes: 20,
   times: 20,
   time: '2016-1-1',
+=======
+  qs: 'How are you？',
+  likes: 20,
+  times: '20',
+>>>>>>> 432bdba16012aff2ae257c3f4bc421d69f6465ae
   tags: ['tag 1', 'tag 2', 'tag 3']
 }];
 
@@ -98,7 +113,7 @@ class Broadcast extends Component {
           dataSource={data} 
           bordered
         />
-        <NewDaily
+        <NewDaliy
           visible={this.state.visible}
           onOk={this.handleOk}
           confirmLoading={this.state.confirmLoading}
