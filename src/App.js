@@ -11,6 +11,7 @@ import {
 } from 'react-router-dom'
 import routes from './router'
 import ModalLogin from './components/login'
+import reqwest from 'reqwest'
 
 const App = observer(class App extends Component {
   constructor(props) {
@@ -24,6 +25,17 @@ const App = observer(class App extends Component {
       confirmLoading: false
     }
   }
+  componentDidMount () {
+    reqwest({
+    url: 'http://api.sx.bencww.com/tags'
+      , method: 'get'
+      , success: function (resp) {
+          // qwery('#content').html(resp)
+          console.log(resp);
+        }
+    })
+  }
+  
   showModal = () => {
     this.props.userStore.logout();
   }

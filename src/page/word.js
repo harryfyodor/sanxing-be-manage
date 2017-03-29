@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Card, Button } from 'antd';
 
-class Word extends Component {
+class Word extends React.Component {
   render () {
     return <div>
     <div className="title">

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class About extends Component {
+class About extends React.Component {
   render () {
     return <div>这是三醒的后台网站</div>
   }
