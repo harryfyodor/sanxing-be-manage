@@ -5,7 +5,7 @@ class Word extends Component {
   render () {
     return <div>
     <div className="title">
-        <h2>词卡管理</h2>
+        <h2>词卡管理~</h2>
     </div>
     <div>
     {
