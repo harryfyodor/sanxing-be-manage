@@ -69,10 +69,11 @@ const App = observer(class App extends Component {
                     <Menu.Item key="3" style={{ 'fontSize': '14px' }}><Link to="/articles">文章管理</Link></Menu.Item>
                   </SubMenu>
                   <SubMenu key="sub3" title={<span style={{ 'fontSize': '14px' }}><Icon type="laptop" />标签管理</span>}>
-                    <Menu.Item key="5" style={{ 'fontSize': '14px' }}><Link to="/tags">标签管理</Link></Menu.Item>
+                    <Menu.Item key="4" style={{ 'fontSize': '14px' }}><Link to="/tags">标签管理</Link></Menu.Item>
                   </SubMenu>
                   <SubMenu key="sub4" title={<span style={{ 'fontSize': '14px' }}><Icon type="laptop" />图片管理</span>}>
-                    <Menu.Item key="6" style={{ 'fontSize': '14px' }}><Link to="/pics">图片管理</Link></Menu.Item>
+                    <Menu.Item key="5" style={{ 'fontSize': '14px' }}><Link to="/pics">图片管理</Link></Menu.Item>
+                    <Menu.Item key="6" style={{ 'fontSize': '14px' }}><Link to="/word">词卡管理</Link></Menu.Item>
                   </SubMenu>
                 </Menu>
               </Sider>

@@ -4,6 +4,7 @@ import Tags from './page/tags';
 import About from './page/about';
 import Article from './page/article';
 import Pics from './page/pics';
+import Word from './page/word';
 
 const routes = [
   { path: '/',
@@ -25,6 +26,10 @@ const routes = [
   {
     path: '/pics',
     main: Pics
+  },
+  {
+    path: '/word',
+    main: Word
   }
 ]
 
