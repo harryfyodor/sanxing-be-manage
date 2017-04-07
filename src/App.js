@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import './App.css'
 import { Layout, Menu, Icon, Modal, Button } from 'antd'
 import { observer } from 'mobx-react';
@@ -13,7 +13,7 @@ import routes from './router'
 import ModalLogin from './components/login'
 import reqwest from 'reqwest'
 
-const App = observer(class App extends Component {
+const App = observer(class App extends React.Component {
   constructor(props) {
     super(props)
     console.log(this.props)
@@ -26,14 +26,14 @@ const App = observer(class App extends Component {
     }
   }
   componentDidMount () {
-    reqwest({
-    url: 'http://api.sx.bencww.com/tags'
-      , method: 'get'
-      , success: function (resp) {
-          // qwery('#content').html(resp)
-          console.log(resp);
-        }
-    })
+    // reqwest({
+    // url: 'http://api.sx.bencww.com/tags'
+    //   , method: 'get'
+    //   , success: function (resp) {
+    //       // qwery('#content').html(resp)
+    //       console.log(resp);
+    //     }
+    // })
   }
   
   showModal = () => {

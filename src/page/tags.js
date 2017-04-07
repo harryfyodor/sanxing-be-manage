@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Tag, Input, Tooltip, Button } from 'antd';
+import ajax from '../utils/ajax';
 
 class Tags extends React.Component {
   state = {
@@ -8,7 +9,47 @@ class Tags extends React.Component {
     inputValue: '',
   };
 
+  componentDidMount() {
+    // 获取tags
+    ajax({
+      url: 'tags'
+    , method: 'get'
+    , success: (resp) => {
+        console.log(resp.data)
+        this.setState({
+          tags: resp.data
+        });
+      }
+    });
+  }
+
+  addTag = (content) => {
+    ajax({
+      url: 'tags'
+    , type: 'json'
+    , method: 'post'
+    , data: { tag: content }
+    , success: (resp) => {
+        console.log(resp);
+      }
+    });
+  }
+
+  removeTag = (content) => {
+    console.log(content)
+    ajax({
+      url: 'tags'
+    , type: 'json'
+    , method: 'delete'
+    , data: { tag: content }
+    , success: (resp) => {
+        console.log(resp);
+      }
+    });
+  }
+
   handleClose = (removedTag) => {
+    this.removeTag(removedTag);
     const tags = this.state.tags.filter(tag => tag !== removedTag);
     this.setState({ tags });
   }
@@ -28,6 +69,7 @@ class Tags extends React.Component {
     if (inputValue && tags.indexOf(inputValue) === -1) {
       tags = [...tags, inputValue];
     }
+    this.addTag(inputValue)
     console.log(tags);
     this.setState({
       tags,

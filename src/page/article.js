@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Icon, Tabs, Button, Tag, Popconfirm, message } from 'antd';
 import { Link } from 'react-router';
-import NewBroadcast from '../components/newBroadcast';
+import NewArticle from '../components/newArticle';
 const TabPane = Tabs.TabPane;
 import reqwest from 'reqwest';
 
@@ -105,6 +105,12 @@ class Broadcast extends React.Component {
     ModalText: 'Content of the modal dialog',
     visible: false,
   };
+  componentDidMount() {
+    // console.log(this.refs.newArticle)
+    // console.log()
+    // const dom = ReactDOM.findDOMNode(this.refs.newArticle)
+    // console.log(dom)
+  }
   callback = (key) => {
     console.log(key);
   }
@@ -159,7 +165,8 @@ class Broadcast extends React.Component {
           />
         </TabPane>
       </Tabs>
-      <NewBroadcast
+      <NewArticle
+        id={"editor"}
         visible={this.state.visible}
         onOk={this.handleOk}
         confirmLoading={this.state.confirmLoading}
@@ -168,5 +175,7 @@ class Broadcast extends React.Component {
     </div>
   }
 }
+
+
 
 export default Broadcast;

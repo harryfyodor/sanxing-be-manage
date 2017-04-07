@@ -1,31 +1,30 @@
-import React from 'react';
 import { Form, Icon, Input, Button, Checkbox, Modal, Tag } from 'antd';
 const FormItem = Form.Item;
 const CheckableTag = Tag.CheckableTag;
 const tagsFromServer = ['Movie', 'Books', 'Music'];
+import React, { Component } from 'react';
 
 class NewBroadcastForm extends React.Component {
   state = {
-      selectedTags: [],
+      // selectedTags: [],
   };
   handleChange(tag, checked) {
-    const { selectedTags } = this.state;
+    const { selectedTags, inputHandler } = this.props;
     const nextSelectedTags = checked ?
             [...selectedTags, tag] :
             selectedTags.filter(t => t !== tag);
     console.log('You are interested in: ', nextSelectedTags);
-    this.setState({ selectedTags: nextSelectedTags });
-  }
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-      }
-    });
+    this.props.inputHandler('selectedTags', nextSelectedTags);
   }
   render() {
     const { getFieldDecorator } = this.props.form;
+    let {
+      content,
+      selectedTags,
+      tags,
+      img,
+      inputHandler
+    } = this.props;
     return (
       <Modal title="添加广播问题"
         visible={this.props.visible}
@@ -38,30 +37,34 @@ class NewBroadcastForm extends React.Component {
           </Button>,
         ]}
       >
-        <Form onSubmit={this.handleSubmit}>
+        <Form>
           <FormItem>
-            {getFieldDecorator('question', {
-              rules: [{ required: true, message: '请输入题目内容' }],
-            })(
-              <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="题目内容" />
-            )}
+            <Input 
+              prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="题目内容" 
+              value={this.props.content}
+              onChange={(e) => {
+                inputHandler('inputContent', e.target.value);
+              }}
+            />  
           </FormItem>
           <FormItem>
-            {getFieldDecorator('image', {
-              rules: [{ required: true, message: '请输入题目图片URL' }],
-            })(
-              <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} placeholder="题目图片" />
-            )}
+            <Input
+              prefix={<Icon type="lock" style={{ fontSize: 13 }} />} placeholder="题目图片" 
+              value={this.props.img}
+              onChange={(e) => {
+                inputHandler('inputImg', e.target.value);
+              }}
+            />
           </FormItem>
           <div>
             <strong>标签: </strong>
-            {tagsFromServer.map(tag => (
+            {tags.map(tag => (
             <CheckableTag
-                key={tag}
-                checked={this.state.selectedTags.indexOf(tag) > -1}
+                key={tag + 'tag'}
+                checked={selectedTags.indexOf(tag) > -1}
                 onChange={checked => this.handleChange(tag, checked)}
             >
-                {tag}
+              {tag}
             </CheckableTag>
             ))}
         </div>

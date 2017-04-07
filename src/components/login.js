@@ -1,6 +1,6 @@
-import React from 'react';
 import { Form, Icon, Input, Button, Checkbox, Modal } from 'antd';
 const FormItem = Form.Item;
+import React, { Component } from 'react';
 
 class NormalLoginForm extends React.Component {
   state = {
